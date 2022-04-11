@@ -8,7 +8,7 @@ const Color: React.FC<Props> = ({color}) => {
     const style: React.CSSProperties = {width: "20vw", height: "20vw", backgroundColor: color}
 
     return(
-        <h1>{color}
+        <h1 style={{color: color}}>{color}
             <div style={style}>
 
             </div>

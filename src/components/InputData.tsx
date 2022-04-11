@@ -26,15 +26,15 @@ const InputData: React.FC<Props> = ({timeZones, injectTimeZone, injectColor}) =>
 
     return(
         <div >
-            <select id="selectInputData">
+            <select style={{height: '50px'}} id="selectInputData">
                 {timeZones.map(tz => <option value={tz.name}>
                     {tz.name}
                 </option>)}
             </select>
-            <button onClick={onSelect}>Go</button>
-        <div style={{marginLeft: '20px'}}>
-            <input type="color" id="color" />
-            <button onClick={onSelectColor}>Color</button>
+            <button onClick={onSelect} style={{width: '70px', height: '50px'}}>Go</button>
+        <div style={{marginLeft: '20px', display: 'flex'}}>
+            <input style={{height: '50px'}} type="color" id="color" />
+            <button style={{width: '70px', height: '50px', fontSize: '16px', color: color}} onClick={onSelectColor}>Color</button>
             <div>{color}</div>
         </div>
 

@@ -4,9 +4,9 @@ import './timer.css';
 type Props = {
     interval?: number,
     locales?: string,
-    timezone?: string
+    timeZone?: string
 }
-const Timer: React.FC<Props> = ({interval, locales, timezone}) =>{
+const Timer: React.FC<Props> = ({interval, locales, timeZone}) =>{
     const [date, setDate] = React.useState(new Date());
     // const [hours, setHors] = React.useState(date.getHours() * 30);
     // const [minutes, setMinutes] = React.useState(date.getMinutes());
@@ -16,8 +16,11 @@ const Timer: React.FC<Props> = ({interval, locales, timezone}) =>{
         setDate(new Date());
     }
     useEffect(() => {
-        setInterval(() => {
+        const intervalId = setInterval(() => {
             tic();
+            return ()=>{
+                clearInterval(intervalId);
+            }
         }, interval || 1000);
 
     }, [])
@@ -34,21 +37,20 @@ const Timer: React.FC<Props> = ({interval, locales, timezone}) =>{
             // </div>
         <div className='clock'>
             <div className='hour'>
-                <div className='hours' style={{transform:`rotateZ(${hours + (minutes / 12)}deg)`}}></div>
+                <div className='hours' style={{transform:`rotateZ(${hours*30}deg)`}}></div>
             </div>
             <div className='minute'>
-                <div className='minutes' style={{transform:`rotateZ(${minutes}deg)`}}></div>
+                <div className='minutes' style={{transform:`rotateZ(${minutes*6}deg)`}}></div>
             </div>
             <div className='second'>
-                <div className="seconds" style={{transform:`rotateZ(${seconds}deg)`}}></div>
+                <div className="seconds" style={{transform:`rotateZ(${seconds*6}deg)`}}></div>
             </div>
             <div className='country'>
-                <div>{date.toLocaleTimeString(locales, {timeZone: timezone})}</div>
-                <div>{timezone}</div>
+                <div>{date.toLocaleTimeString(locales, {timeZone: timeZone})}</div>
+                <div>{timeZone}</div>
             </div>
         </div>
         )
-
 }
 
 export default Timer;
