@@ -1,8 +1,3 @@
-.button{
-  width: 150px;
-  height: 50px;
-  background-color: aquamarine;
-}
-.button:hover{
-  background-color: gold;
+*{
+    box-sizing: border-box;
 }
