@@ -8,6 +8,7 @@ function App() {
   return(
       <div>
         <Life dimension={lifeGame.dimension} ticInterval={lifeGame.tic}/>
+          {/*<Life dimension={lifeGame.dimension} ticInterval={lifeGame.tic}/>*/}
       </div>
   )
 }

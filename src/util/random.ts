@@ -14,11 +14,3 @@ export function getRandomMatrix(columns: number, rows:number, min:number, max:nu
     }
     return res;
 }
-
-export const arrO:number[][] = [
-    [0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,1,0,0,0,0],
-    [0,0,0,0,1,0,0,0,0],
-    [0,0,0,0,1,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0],
-]

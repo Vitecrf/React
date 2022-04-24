@@ -1,39 +1,39 @@
-import {getRandomMatrix, arrO} from "../util/random";
-
+import {getRandomMatrix} from "../util/random";
+function fromAlive(nLives: number): number {
+    return +(nLives === 2 || nLives === 3);//to 1 only if the condition true
+}
+function fromDead(nLives: number): number {
+    return +(nLives === 3);//to 1 only if the condition true
+}
 export default class LifeMatrix{
-    constructor(private _numbers:number[][]) {
-
+    constructor(private _numbers: number[][]) {
     }
     get numbers(){
         return this._numbers;
     }
+
     nextStep():number[][]{
-        // this._numbers = getRandomMatrix(this._numbers.length, this._numbers.length, 0, 1);
-        // this._numbers = arrO;
-        let arr:number[][] = [...this._numbers];
+        // let arr:number[][] = [...this._numbers]  ????? мутирует
+        let arr:number[][] = JSON.parse(JSON.stringify(this.numbers));
 
-        let newArr:number[][] = this._numIsLands(arr);
-
-
+        this._numbers = this._numIsLands(arr);
         console.log(this._numbers);
-        return newArr;
+        return this._numbers;
     }
 
     private _numIsLands(arr:number[][]):number[][]{
         let counter:number = 0;
-        let rowL:number = arr.length;
-        let colsL:number = arr[0].length;
-        // if(rowL === 0) return 0;
 
-        for(let r:number = 0; r < rowL; r++){
-            for(let c:number = 0; c < colsL; c++){
-                if(arr[r][c] === 1){
-                    counter = this._countNeighbour(arr, r, c);
+        for(let r:number = 0; r < this.numbers.length; r++){
+            for(let c:number = 0; c < this.numbers[r].length; c++){
+                if(this.numbers[r][c] === 1){
+                    // console.log(counter)
+                    counter = this._countNeighbour(this.numbers, r, c);
                     this._markNeighbour(counter, arr, r, c);
                 }
-                if(arr[r][c] === 0){
+                else if(this.numbers[r][c] === 0){
                     counter = 0;
-                    counter = this._countNeighbour(arr, r, c);
+                    counter = this._countNeighbour(this.numbers, r, c);
                     if(counter == 3){arr[r][c] = 1}
                 }
             }
@@ -59,6 +59,5 @@ export default class LifeMatrix{
         if(neighbour == 2 || neighbour == 3){arr[r][c] = 1}
         if(neighbour > 3){arr[r][c] = 0}
     }
-
 }
 
