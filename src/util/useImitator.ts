@@ -9,7 +9,11 @@ import {Course, createCourse} from "../models/Course";
 import {StateType} from "../redux/stor";
 import {courses} from "../config/service-config";
 
-const initialStat = {value: 0};
+export const initialStat = {value: 0,
+add: 0,
+remove: 0,
+update: 0
+};
 export function useImitator(){
     // const [statistic, setStatistic] = useState<number>(0);
     const courses: Course[] = useSelector<StateType, Course[]>(state => state.courses);
@@ -37,14 +41,17 @@ export function useImitator(){
         console.log("просмотр ->" + initialStat.value);
     }
     function dispatchAdd(){
+        initialStat.add +=1;
         dispatch(addCourse(getRandomCourse(courseData)));
         console.log("Add")
     }
     function dispatchRemove(){
+        initialStat.remove +=1;
         dispatch(removeCourse(getIndexCourse()));
         console.log("Remove")
     }
     function dispatchUpdate(){
+        initialStat.update +=1;
         const courseUp: Course = courses[getIndexCourse()];
         // dispatch(removeCourse(index));
         dispatch(updateCourse(courseUp))
