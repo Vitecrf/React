@@ -1,3 +1,8 @@
 *{
     box-sizing: border-box;
 }
+
+.MuiTabs-indicator{
+    background-color: rgb(255, 255, 255) !important;
+    height: 5px !important;
+}

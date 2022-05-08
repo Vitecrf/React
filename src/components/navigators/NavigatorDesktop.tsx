@@ -2,6 +2,7 @@ import React from 'react';
 import {RouteType} from "../../models/RouteType";
 import {AppBar, Tab, Tabs} from "@mui/material";
 import {Link as RouterLink} from "react-router-dom"
+import '../../App.css';
 
 const NavigatorDesktop: React.FC<{items: RouteType[]}> = ({items}) => {
     const [tabNumber, setTabNumber] = React.useState<number>(0);

@@ -4,15 +4,14 @@ import {Link} from "react-router-dom";
 import NavigatorDesktop from "./NavigatorDesktop";
 import NavigatorMobile from "./NavigatorMobile";
 import {useMediaQuery} from "@mui/material";
-import {ROUTES} from "../../config/routes-config";
+// import {ROUTES} from "../../config/routes-config";
 
 
 const Navigator:React.FC<{items:RouteType[]}> = ({items}) => {
     const isLaptopDesktop = useMediaQuery('(min-width: 900px)');
-
     return(
         <div style={{marginTop: '6vh'}}>
-            {isLaptopDesktop ? <NavigatorDesktop items={ROUTES}/> : <NavigatorMobile items={ROUTES}/>}
+            {isLaptopDesktop ? <NavigatorDesktop items={items}/> : <NavigatorMobile items={items}/>}
         </div>
     )
 }
