@@ -3,6 +3,19 @@
 }
 
 .MuiTabs-indicator{
-    background-color: rgb(255, 255, 255) !important;
-    height: 5px !important;
+    /*background-color: rgb(255, 255, 255) !important;*/
+    background: #1976d2 !important;
+    /*border-radius: 50%  !important;*/
+    padding: 20px  !important;
+    /*position: absolute  !important;*/
+    color: #fff  !important;
+    z-index: -1;
+}
+.MuiTabs-indicator::after {
+    content: "";
+    position: absolute !important;
+    right: 43% !important;
+    top: 20px !important;
+    border: 10px solid transparent !important;
+    border-bottom: 10px solid #fff !important;
 }
