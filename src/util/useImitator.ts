@@ -7,60 +7,84 @@ import courseData from "../config/courseData.json"
 import {getRandomNumber} from "./random";
 import {Course, createCourse} from "../models/Course";
 import {StateType} from "../redux/stor";
-import {courses} from "../config/service-config";
+
 
 export const initialStat = {value: 0,
 add: 0,
 remove: 0,
 update: 0
 };
-export function useImitator(){
+export function useImitator() {
     // const [statistic, setStatistic] = useState<number>(0);
     const courses: Course[] = useSelector<StateType, Course[]>(state => state.courses);
     const dispatch = useDispatch();
-    useEffect(()=> {
+    useEffect(() => {
         const idInterval = setInterval(action, 1000);
         return () => {
             clearInterval(idInterval);
         }
     }, [courses])
 
-    function action(){
+    function action() {
         const number = getRandomNumber(0, 100);
         const imitatorAction: ImitatorAction = getAction(number);
-        switch (imitatorAction.action){
-            case 'nothing': dispatchNothing(); break;
-            case 'add': dispatchAdd(); break;
-            case 'remove': dispatchRemove(); break;
-            case 'update': dispatchUpdate(); break;
-            default: break;
+        switch (imitatorAction.action) {
+            case 'nothing':
+                dispatchNothing();
+                break;
+            case 'add':
+                dispatchAdd();
+                break;
+            case 'remove':
+                dispatchRemove();
+                break;
+            case 'update':
+                dispatchUpdate();
+                break;
+            default:
+                break;
         }
     }
+
     function dispatchNothing() {
         initialStat.value += 1;
         console.log("просмотр ->" + initialStat.value);
     }
-    function dispatchAdd(){
-        initialStat.add +=1;
+
+    function dispatchAdd() {
+        initialStat.add += 1;
         dispatch(addCourse(getRandomCourse(courseData)));
         console.log("Add")
     }
-    function dispatchRemove(){
-        initialStat.remove +=1;
-        dispatch(removeCourse(getIndexCourse()));
-        console.log("Remove")
+
+    function dispatchRemove() {
+        if(courses.length != 0){
+            initialStat.remove += 1;
+            dispatch(removeCourse(getIndexCourse()));
+            console.log("Remove")
+        }
     }
-    function dispatchUpdate(){
-        initialStat.update +=1;
-        const courseUp: Course = courses[getIndexCourse()];
-        // dispatch(removeCourse(index));
-        dispatch(updateCourse(courseUp))
-        console.log("Update -> " + courseUp.id)
+
+    function dispatchUpdate() {
+        if(courses.length != 0) {
+            initialStat.update += 1;
+            const courseGegId: Course = courses[getIndexCourse()];
+           const courseUp = getRandomCourse(courseData);
+            console.log("courseUp -> " + courseUp.id + " courseGegId ->" + courseGegId.id)
+           courseUp.id = courseGegId.id;
+            console.log("courseUp -> " + courseUp.id)
+            dispatch(updateCourse(courseUp))
+            console.log("Update -> " + courseUp.id)
+        }
+    }
+
+    function getIndexCourse(): number {
+        return getRandomNumber(0, courses.length);
     }
 }
-
-// function getAction(num: number): ImitatorAction{
-//     return imitatorActions.find(ia => num <= ia.prob) ?? imitatorActions[imitatorActions.length-1]
+// function getAction(num: number):ImitatorAction{
+//     const res = imitatorActions.find(ia => num <= ia.prob) ?? imitatorActions[imitatorActions.length-1];
+//     return res;
 // }
 
 function getAction(number: any): ImitatorAction{
@@ -70,7 +94,4 @@ function getAction(number: any): ImitatorAction{
         }
     }
     return imitatorActions[imitatorActions.length-1];
-}
-function getIndexCourse():number{
-    return getRandomNumber(0, courses.length);
 }

@@ -1,19 +1,20 @@
 import React from "react";
 import {RouteType} from "../../models/RouteType";
 import {Link} from "react-router-dom";
-
-
+import NavigatorDesktop from "./NavigatorDesktop";
+import NavigatorMobile from "./NavigatorMobile";
+import {useMediaQuery} from "@mui/material";
+import {ROUTES} from "../../config/routes-config";
 
 
 const Navigator:React.FC<{items:RouteType[]}> = ({items}) => {
-    function getLinks():React.ReactNode{
-        return items.map(i => <Link to={i.path} key={i.path}>{i.label}</Link>)
-    }
+    const isLaptopDesktop = useMediaQuery('(min-width: 900px)');
+
     return(
-            <nav style={{display: 'flex', justifyContent: 'space-evenly'}}>
-                {getLinks()}
-            </nav>
-        )
+        <div style={{marginTop: '6vh'}}>
+            {isLaptopDesktop ? <NavigatorDesktop items={ROUTES}/> : <NavigatorMobile items={ROUTES}/>}
+        </div>
+    )
 }
 
 export default Navigator;
