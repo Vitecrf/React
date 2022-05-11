@@ -48,20 +48,20 @@ export function useImitator() {
 
     function dispatchNothing() {
         initialStat.value += 1;
-        console.log("просмотр ->" + initialStat.value);
+        // console.log("просмотр ->" + initialStat.value);
     }
 
     function dispatchAdd() {
         initialStat.add += 1;
         dispatch(addCourse(getRandomCourse(courseData)));
-        console.log("Add")
+        // console.log("Add")
     }
 
     function dispatchRemove() {
         if(courses.length != 0){
             initialStat.remove += 1;
             dispatch(removeCourse(getIndexCourse()));
-            console.log("Remove")
+            // console.log("Remove")
         }
     }
 
@@ -72,9 +72,9 @@ export function useImitator() {
            const courseUp = getRandomCourse(courseData);
             console.log("courseUp -> " + courseUp.id + " courseGegId ->" + courseGegId.id)
            courseUp.id = courseGegId.id;
-            console.log("courseUp -> " + courseUp.id)
+            // console.log("courseUp -> " + courseUp.id)
             dispatch(updateCourse(courseUp))
-            console.log("Update -> " + courseUp.id)
+            // console.log("Update -> " + courseUp.id)
         }
     }
 

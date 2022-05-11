@@ -19,3 +19,7 @@
     border: 10px solid transparent !important;
     border-bottom: 10px solid #fff !important;
 }
+
+.MuiToolbar{
+    min-height: 48px !important;
+}
